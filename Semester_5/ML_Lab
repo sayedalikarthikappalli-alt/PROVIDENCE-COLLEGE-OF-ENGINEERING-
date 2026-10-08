@@ -1,0 +1,108 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPCnXXTulcrsbZ8m1zSDTfb",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sayedalikarthikappalli-alt/PROVIDENCE-COLLEGE-OF-ENGINEERING-/blob/main/Semester_5/ML_Lab\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "WmcYiVj_mZ56",
+        "outputId": "fe86238e-9c1d-4338-b168-ce9f2b5cde96"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "K = 2\n",
+            "Inertia: 100423.84\n",
+            "Silhouette Score: 0.106\n",
+            "\n",
+            "K = 3\n",
+            "Inertia: 93842.48\n",
+            "Silhouette Score: 0.105\n",
+            "\n",
+            "K = 4\n",
+            "Inertia: 89213.97\n",
+            "Silhouette Score: 0.095\n",
+            "\n",
+            "K = 5\n",
+            "Inertia: 85096.05\n",
+            "Silhouette Score: 0.102\n",
+            "\n",
+            "   Number of Cluster(K)        Inertia  Silhouette Score\n",
+            "0                     2  100423.843034          0.105638\n",
+            "1                     3   93842.482749          0.105287\n",
+            "2                     4   89213.968157          0.095386\n",
+            "3                     5   85096.054668          0.102298\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.datasets import load_digits\n",
+        "from sklearn.preprocessing import StandardScaler\n",
+        "from sklearn.cluster import KMeans\n",
+        "from sklearn.metrics import silhouette_score\n",
+        "import pandas as pd\n",
+        "\n",
+        "# Load and preprocess data\n",
+        "x = load_digits().data\n",
+        "x_scaled = StandardScaler().fit_transform(xo)\n",
+        "\n",
+        "# K-Means for K = 2 to 5\n",
+        "results = []\n",
+        "\n",
+        "for k in range(2, 6):\n",
+        "    model = KMeans(n_clusters=k, random_state=42, n_init=10)\n",
+        "    labels = model.fit_predict(x_scaled)\n",
+        "\n",
+        "    print(\"K =\", k)\n",
+        "    print(\"Inertia:\", round(model.inertia_, 2))\n",
+        "    print(\"Silhouette Score:\", round(silhouette_score(x_scaled, labels), 3))\n",
+        "    print()\n",
+        "\n",
+        "    results.append([k, model.inertia_, silhouette_score(x_scaled, labels)])\n",
+        "\n",
+        "# Display results\n",
+        "results = pd.DataFrame(results, columns=[\"Number of Cluster(K)\", \"Inertia\", \"Silhouette Score\"])\n",
+        "print(results)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "_wg8fGHquzXg"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
